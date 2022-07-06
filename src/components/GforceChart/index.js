@@ -103,13 +103,13 @@ const GforceChart = ({ accG }) => {
             fill={"red"}
             r={dataRadius}
           />
-
+          {/* 
           <Text dx={8} dy={4} x={width / 2} y={0} fill={"white"}>
             {lateralG}
           </Text>
           <Text dx={-4} dy={-8} x={0} y={-height / 2} fill={"white"}>
             {longiG}
-          </Text>
+          </Text> */}
         </Group>
       </svg>
     </div>
