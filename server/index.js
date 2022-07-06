@@ -25,7 +25,7 @@ const startWSSServer = () => {
         const result = {
           isEngineRunning: m_physics_result.rpms > 1000,
           accG: m_physics_result.accG.map(
-            (val) => Math.floor((val + Number.EPSILON) * 100) / 100
+            (val) => Math.round((val + Number.EPSILON) * 100) / 100
           ),
         };
         ws.send(JSON.stringify(result));
@@ -49,12 +49,14 @@ const startWSSServer = () => {
 if (process.env.DEBUG_MODE == 1) {
   console.log("debug mode", process.env.DEBUG_MODE);
   setInterval(() => {
-    const { m_physics_result } =
-      wrapper.getAllSharedMemory();
-    console.log("accG", m_physics_result.accG.map(
-      (val) => Math.floor((val + Number.EPSILON) * 100) / 100
-    ));
-  }, 1000 / 2);
+    const { m_physics_result } = wrapper.getAllSharedMemory();
+    console.log(
+      "accG",
+      m_physics_result.accG.map(
+        (val) => Math.round((val + Number.EPSILON) * 100) / 100
+      )
+    );
+  }, 1000 / 24);
 } else {
   startWSSServer();
 }
