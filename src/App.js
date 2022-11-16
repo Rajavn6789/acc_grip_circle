@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 // how to import the remote module in a React component?
 
 import GforceChart from "./components/GforceChart";
+import RacingLineChart from "./components/RacingLineChart";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
 
@@ -32,7 +33,6 @@ function App() {
   const webSocket = useRef(null);
 
   useEffect(() => {
-    console.log('accStatus', accStatus)
     if (ipcRenderer) {
       ipcRenderer.send(`acc_${accStatus}`);
     }
@@ -88,7 +88,12 @@ function App() {
 
   return (
     <div>
-      <GforceChart accG={getRecentData(data, "accG")} />
+      <RacingLineChart
+        id="trackreportdetail"
+        data={data}
+        width={1920}
+        height={1080}
+      />
     </div>
   );
 }
