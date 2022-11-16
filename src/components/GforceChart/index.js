@@ -11,8 +11,8 @@ const max = 2;
 const hTickValues = generateRangeArr(min, max, 2);
 const vTickValues = generateRangeArr(min, max, 2);
 
-const width = 250;
-const height = 250;
+const width = 200;
+const height = 200;
 const dataRadius = 8;
 
 const circleRadius = width / 2;
@@ -40,7 +40,7 @@ const GforceChart = ({ accG }) => {
     <div style={{ display: "flex", justifyContent: "center", padding: 8 }}>
       <svg width={width + 70} height={height + 70}>
         <circle
-          fill={"#343334"}
+          fill={"transparent"}
           cx={width / 2 + 20}
           cy={height / 2 + 20}
           r={circleRadius}
@@ -66,7 +66,7 @@ const GforceChart = ({ accG }) => {
           strokeOpacity={0.2}
           strokeWidth="3"
         />
-        <Group top={height / 2 + 20} left={width / 2 + 20}>
+        <Group top={height / 2 + 20} left={width / 2 + 20} fill="transparent">
           <Axis
             key={`axis-horizontal`}
             labelProps={{
