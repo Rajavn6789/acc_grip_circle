@@ -1,28 +1,30 @@
 // Module to control the application lifecycle and the native browser window.
 const { app, BrowserWindow, protocol } = require("electron");
-const log = require('electron-log');
+const log = require("electron-log");
 const path = require("path");
 const url = require("url");
 const electron = require("electron");
-
 
 const { ipcMain } = electron;
 
 // Create the native browser window.
 function createWindow() {
   let mainWindow = new BrowserWindow({
-    width: 500,
-    height: 500,
+    width: 1280,
+    height: 1024,
     transparent: true,
     movable: true,
     fullScreen: false,
     frame: false,
     webPreferences: {
+      devTools: false,
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: true,
     },
   });
+
+  mainWindow.setIgnoreMouseEvents(true);
 
   mainWindow.setAlwaysOnTop(true, "level");
 
@@ -46,17 +48,17 @@ function createWindow() {
 
   mainWindow.show();
 
-  log.info('Hello window is shown');
+  // log.info("Hello window is shown");
 
-  ipcMain.on("acc_offline", function () {
-    log.info('Hello, acc_offline');
-    mainWindow.hide();
-  });
+  // ipcMain.on("acc_offline", function () {
+  //   log.info("Hello, acc_offline");
+  //   mainWindow.hide();
+  // });
 
-  ipcMain.on("acc_online", function () {
-    log.info('Hello, acc_online');
-    mainWindow.show();
-  });
+  // ipcMain.on("acc_online", function () {
+  //   log.info("Hello, acc_online");
+  //   mainWindow.show();
+  // });
 
   // Automatically open Chrome's DevTools in development mode.
   if (!app.isPackaged) {

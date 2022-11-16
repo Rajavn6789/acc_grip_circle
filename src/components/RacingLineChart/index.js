@@ -1,17 +1,13 @@
 import React, { useMemo, useLayoutEffect } from "react";
 import { getTurns, getSectors } from "../../utils/constants";
-import misano from "../../assets/track/misano.png";
-import misano_skewed from "../../assets/track/misano_skewed.png";
 
 import * as d3 from "d3";
 
-const RacingLineChart = ({
-  id,
-  data,
-  height = 400,
-  width = 400,
-  trackName,
-}) => {
+const data = require("./data.json");
+
+console.log("data", data);
+
+const RacingLineChart = ({ id, height = 400, width = 400, trackName }) => {
   const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
   const xAccessor = (d) => d.carCoordinates[2];
@@ -92,8 +88,8 @@ const RacingLineChart = ({
         zoom.transform,
         d3.zoomIdentity
           .translate(boundedWidth / 2, boundedHeight / 2)
-          .scale(1.5)
-          .translate(-920, -750)
+          .scale(2)
+          .translate(-850, -300)
       );
   }, [boundedHeight, boundedWidth]);
 
@@ -105,7 +101,7 @@ const RacingLineChart = ({
       })
       .y((d) => yScale(yAccessor(d)));
 
-    const linePath = lineGenerator(data.slice(50, 1200));
+    const linePath = lineGenerator(data.slice(30, 400));
 
     return (
       <path
